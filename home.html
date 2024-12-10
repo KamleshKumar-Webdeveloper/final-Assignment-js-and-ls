@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home Page</title>
+    <link rel="stylesheet" href="./styling/home.css" />
+  </head>
+  <body>
+    <button id="add-product-btn">Add Product</button>
+    <div id="product-list" class="product-list"></div>
+    <script>
+      document
+        .getElementById("add-product-btn")
+        .addEventListener("click", () => {
+          window.location.href = "./about.html";
+        });
+
+      const products = JSON.parse(localStorage.getItem("products")) || [];
+      const productList = document.getElementById("product-list");
+
+      for (let i = 0; i < products.length; i++) {
+        const product = products[i];
+
+        const productCard = document.createElement("div");
+        productCard.setAttribute("class", "product-card");
+
+        const productImage = document.createElement("img");
+        productImage.src = product.image;
+        productImage.setAttribute("class", "product-image");
+
+        const productTitle = document.createElement("h2");
+        productTitle.innerText = product.title;
+        productTitle.setAttribute("class", "product-title");
+
+        const productDescription = document.createElement("p");
+        productDescription.innerText = product.description;
+        productDescription.setAttribute("class", "product-description");
+
+        const productPrice = document.createElement("p");
+        productPrice.innerText = `Price: $${product.price}`;
+        productPrice.setAttribute("class", "product-price");
+
+        productCard.appendChild(productImage);
+        productCard.appendChild(productTitle);
+        productCard.appendChild(productDescription);
+        productCard.appendChild(productPrice);
+        productList.appendChild(productCard);
+      }
+    </script>
+  </body>
+</html>
